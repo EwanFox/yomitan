@@ -58,6 +58,9 @@ test('visual', async ({context, page, extensionId}) => {
     // get the locator for the disk usage indicator so we can later mask it out of the screenshot
     const storage_locator = page.locator('.storage-use-finite >> xpath=..');
 
+    //make sure font is loaded just in case
+    await page.evaluate(() => document.fonts.ready);
+    
     // take a simple screenshot of the settings page
     await expect.soft(page).toHaveScreenshot('settings-fresh.png', {mask: [storage_locator]});
 
@@ -65,6 +68,9 @@ test('visual', async ({context, page, extensionId}) => {
     await page.locator('input[id="dictionary-import-file-input"]').setInputFiles(path.join(root, 'dictionaries/jmdict_english.zip'));
     await expect(page.locator('id=dictionaries')).toHaveText('Dictionaries (1 installed, 1 enabled)', {timeout: 5 * 60 * 1000});
 
+    //await font loading
+    await page.evaluate(() => document.fonts.ready);
+    
     // take a screenshot of the settings page with jmdict loaded
     await expect.soft(page).toHaveScreenshot('settings-jmdict-loaded.png', {mask: [storage_locator]});
 
@@ -92,6 +98,10 @@ test('visual', async ({context, page, extensionId}) => {
         }
 
         await page.bringToFront(); // bring the page to the foreground so the screenshot doesn't hang; for some reason the frames result in page being in the background
+
+        //Make sure font is loaded
+        await page.evaluate(() => document.fonts.ready);
+        
         await expect.soft(page).toHaveScreenshot(test_name + '.png');
 
         await page.mouse.click(0, 0); // click away so popup disappears
