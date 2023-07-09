@@ -45,7 +45,7 @@ jobs:
         id: master-screenshots
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          repo: themoeway/yomitan # so that this works on forks
+          repo: EwanFox/yomitan # so that this works on forks
           name: playwright-screenshots
           branch: master
           workflow: playwright.yml
