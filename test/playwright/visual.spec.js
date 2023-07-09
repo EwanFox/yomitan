@@ -59,8 +59,8 @@ test('visual', async ({context, page, extensionId}) => {
     const storage_locator = page.locator('.storage-use-finite >> xpath=..');
 
     //make sure font is loaded just in case
-    await page.evaluate(() => document.fonts.ready);
-    
+    let e = await page.evaluate(() => document.fonts.ready);
+    console.log(e);
     // take a simple screenshot of the settings page
     await expect.soft(page).toHaveScreenshot('settings-fresh.png', {mask: [storage_locator]});
 
