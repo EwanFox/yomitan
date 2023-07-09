@@ -110,7 +110,7 @@ test('visual', async ({context, page, extensionId}) => {
 
     // Load test-document1.html
     await page.goto('file://' + path.join(root, 'test/data/html/test-document1.html'));
-    console.log('file://' + path.join(root, 'test/data/html/test-document1.html')
+    console.log('file://' + path.join(root, 'test/data/html/test-document1.html'));
     await page.setViewportSize({width: 1000, height: 1800});
     await page.keyboard.down('Shift');
     let i = 1;
