@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Noto Sans JP';
-    src: url('https://github.com/google/fonts/raw/main/ofl/notosansjp/NotoSansJP%5Bwght%5D.ttf');
+    src: url('file:///home/runner/work/yomitan/yomitan/test/data/html/NotoSansJP.ttf');
 }
 
 body {
