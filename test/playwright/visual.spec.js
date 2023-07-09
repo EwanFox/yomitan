@@ -61,6 +61,18 @@ test('visual', async ({context, page, extensionId}) => {
     //make sure font is loaded just in case
     let e = await page.evaluate(() => document.fonts.ready);
     console.log(e);
+
+    await page.addStyleTag(`@font-face {
+                font-family: 'Noto Sans JP';
+                src: url('./NotoSansJP.ttf') format('opentype');
+            }
+body {
+    font-family: "Noto Sans JP", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    padding: 0;
+    margin: 0;
+    background-color: #f8f8f8;
+}`)
     // take a simple screenshot of the settings page
     await expect.soft(page).toHaveScreenshot('settings-fresh.png', {mask: [storage_locator]});
 
@@ -70,6 +82,18 @@ test('visual', async ({context, page, extensionId}) => {
 
     //await font loading
     await page.evaluate(() => document.fonts.ready);
+
+    await page.addStyleTag(`@font-face {
+                font-family: 'Noto Sans JP';
+                src: url('./NotoSansJP.ttf') format('opentype');
+            }
+body {
+    font-family: "Noto Sans JP", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    padding: 0;
+    margin: 0;
+    background-color: #f8f8f8;
+}`)
     
     // take a screenshot of the settings page with jmdict loaded
     await expect.soft(page).toHaveScreenshot('settings-jmdict-loaded.png', {mask: [storage_locator]});
