@@ -123,7 +123,6 @@ body {
 
         // Make sure font is loaded
         await page.evaluate(() => document.fonts.ready); // eslint-disable-line
-        
         await expect.soft(page).toHaveScreenshot(test_name + '.png');
 
         await page.mouse.click(0, 0); // click away so popup disappears
