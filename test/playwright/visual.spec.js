@@ -57,9 +57,6 @@ test('visual', async ({context, page, extensionId}) => {
 
     // get the locator for the disk usage indicator so we can later mask it out of the screenshot
     const storage_locator = page.locator('.storage-use-finite >> xpath=..');
-
-    //make sure font is loaded just in case
-    let e = await page.evaluate(() => document.fonts.ready);
     console.log(e);
 
     await page.addStyleTag({content: `@font-face {
@@ -73,15 +70,16 @@ body {
     margin: 0;
     background-color: #f8f8f8;
 }`})
+
+    //make sure font is loaded just in case
+    let e = await page.evaluate(() => document.fonts.ready);
+    
     // take a simple screenshot of the settings page
     await expect.soft(page).toHaveScreenshot('settings-fresh.png', {mask: [storage_locator]});
 
     // load in jmdict_english.zip
     await page.locator('input[id="dictionary-import-file-input"]').setInputFiles(path.join(root, 'dictionaries/jmdict_english.zip'));
     await expect(page.locator('id=dictionaries')).toHaveText('Dictionaries (1 installed, 1 enabled)', {timeout: 5 * 60 * 1000});
-
-    //await font loading
-    await page.evaluate(() => document.fonts.ready);
 
     await page.addStyleTag({content: `@font-face {
                 font-family: 'Noto Sans JP';
@@ -94,6 +92,9 @@ body {
     margin: 0;
     background-color: #f8f8f8;
 }`})
+
+    //await font loading
+    await page.evaluate(() => document.fonts.ready);
     
     // take a screenshot of the settings page with jmdict loaded
     await expect.soft(page).toHaveScreenshot('settings-jmdict-loaded.png', {mask: [storage_locator]});
