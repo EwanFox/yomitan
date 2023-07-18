@@ -68,10 +68,10 @@ body {
     padding: 0;
     margin: 0;
     background-color: #f8f8f8;
-}`})
+}`});
 
-    //make sure font is loaded just in case
-    let e = await page.evaluate(() => document.fonts.ready);
+    // make sure font is loaded just in case
+    await page.evaluate(() => document.fonts.ready);
     
     // take a simple screenshot of the settings page
     await expect.soft(page).toHaveScreenshot('settings-fresh.png', {mask: [storage_locator]});
@@ -90,9 +90,9 @@ body {
     padding: 0;
     margin: 0;
     background-color: #f8f8f8;
-}`})
+}`});
 
-    //await font loading
+    // await font loading
     await page.evaluate(() => document.fonts.ready);
     
     // take a screenshot of the settings page with jmdict loaded
