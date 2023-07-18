@@ -71,7 +71,7 @@ body {
 }`});
 
     // make sure font is loaded just in case
-    await page.evaluate(() => document.fonts.ready);
+    await page.evaluate(() => document.fonts.ready); // eslint-disable-line
     
     // take a simple screenshot of the settings page
     await expect.soft(page).toHaveScreenshot('settings-fresh.png', {mask: [storage_locator]});
@@ -124,7 +124,7 @@ body {
         await page.bringToFront(); // bring the page to the foreground so the screenshot doesn't hang; for some reason the frames result in page being in the background
 
         //Make sure font is loaded
-        await page.evaluate(() => document.fonts.ready);
+        await page.evaluate(() => document.fonts.ready); // eslint-disable-line
         
         await expect.soft(page).toHaveScreenshot(test_name + '.png');
 
