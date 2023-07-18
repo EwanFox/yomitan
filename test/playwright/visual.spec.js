@@ -57,7 +57,6 @@ test('visual', async ({context, page, extensionId}) => {
 
     // get the locator for the disk usage indicator so we can later mask it out of the screenshot
     const storage_locator = page.locator('.storage-use-finite >> xpath=..');
-    console.log(e);
 
     await page.addStyleTag({content: `@font-face {
                 font-family: 'Noto Sans JP';
