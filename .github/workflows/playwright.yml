@@ -55,13 +55,13 @@ jobs:
       - name: "[PR] Generate new screenshots & compare against master"
         id: playwright
         run: |
-          npx playwright test 2>&1 | tee ./playwright-output || true
+          npx playwright test 2>&1 --browser chromium | tee ./playwright-output || true
         continue-on-error: true
         if: github.event_name == 'pull_request' && steps.master-screenshots.outcome != 'failure'
 
       - name: "[Push] Generate new authoritative screenshots for master"
         id: playwright-master
-        run: npx playwright test -u
+        run: npx playwright test -u --browser chromium
         if: github.event_name == 'push'
 
       - uses: actions/upload-artifact@v3
