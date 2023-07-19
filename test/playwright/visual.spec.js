@@ -58,17 +58,22 @@ test('visual', async ({context, page, extensionId}) => {
     // get the locator for the disk usage indicator so we can later mask it out of the screenshot
     const storage_locator = page.locator('.storage-use-finite >> xpath=..');
 
-    await page.addStyleTag({content: `@font-face {
-                font-family: 'Noto Sans JP';
-                src: url('./NotoSansJP.ttf') format('opentype');
-            }
+    await page.evaluate(() => {
+        const newStyle = document.createElement('style');
+        newStyle.appendChild(document.createTextNode(`@font-face {
+    font-family: 'Noto Sans JP';
+    src: url('./NotoSansJP.ttf') format('opentype');
+}
 body {
-    font-family: "Noto Sans JP", Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    padding: 0;
-    margin: 0;
-    background-color: #f8f8f8;
-}`});
+font-family: "Noto Sans JP", Helvetica, Arial, sans-serif;
+font-size: 14px;
+padding: 0;
+margin: 0;
+background-color: #f8f8f8;
+}`));
+
+        document.head.appendChild(newStyle);
+    });
 
     // make sure font is loaded just in case
     await page.evaluate(() => document.fonts.ready); // eslint-disable-line
@@ -79,17 +84,22 @@ body {
     await page.locator('input[id="dictionary-import-file-input"]').setInputFiles(path.join(root, 'dictionaries/jmdict_english.zip'));
     await expect(page.locator('id=dictionaries')).toHaveText('Dictionaries (1 installed, 1 enabled)', {timeout: 5 * 60 * 1000});
 
-    await page.addStyleTag({content: `@font-face {
-                font-family: 'Noto Sans JP';
-                src: url('./NotoSansJP.ttf') format('opentype');
-            }
+    await page.evaluate(() => {
+        const newStyle = document.createElement('style');
+        newStyle.appendChild(document.createTextNode(`@font-face {
+    font-family: 'Noto Sans JP';
+    src: url('./NotoSansJP.ttf') format('opentype');
+}
 body {
-    font-family: "Noto Sans JP", Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    padding: 0;
-    margin: 0;
-    background-color: #f8f8f8;
-}`});
+font-family: "Noto Sans JP", Helvetica, Arial, sans-serif;
+font-size: 14px;
+padding: 0;
+margin: 0;
+background-color: #f8f8f8;
+}`));
+
+        document.head.appendChild(newStyle);
+    });
 
     // await font loading
     await page.evaluate(() => document.fonts.ready); // eslint-disable-line
