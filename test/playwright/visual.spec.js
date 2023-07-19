@@ -62,7 +62,7 @@ test('visual', async ({context, page, extensionId}) => {
         const newStyle = document.createElement('style');
         newStyle.appendChild(document.createTextNode(`@font-face {
     font-family: 'Noto Sans JP';
-    src: url('./NotoSansJP.ttf') format('opentype');
+    src: url('file:///home/runner/work/yomitan/yomitan/test/data/html/NotoSansJP.ttf');
 }
 body {
 font-family: "Noto Sans JP", Helvetica, Arial, sans-serif;
@@ -88,7 +88,7 @@ background-color: #f8f8f8;
         const newStyle = document.createElement('style');
         newStyle.appendChild(document.createTextNode(`@font-face {
     font-family: 'Noto Sans JP';
-    src: url('./NotoSansJP.ttf') format('opentype');
+    src: url('file:///home/runner/work/yomitan/yomitan/test/data/html/NotoSansJP.ttf');
 }
 body {
 font-family: "Noto Sans JP", Helvetica, Arial, sans-serif;
