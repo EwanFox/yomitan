@@ -54,8 +54,7 @@ jobs:
 
       - name: "[PR] Generate new screenshots & compare against master"
         id: playwright
-        run: |
-          npx playwright test 2>&1 | tee ./playwright-output || true
+        run: npx playwright test -u
         continue-on-error: true
         if: github.event_name == 'pull_request' && steps.master-screenshots.outcome != 'failure'
 
