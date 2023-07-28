@@ -59,20 +59,23 @@ test('visual', async ({context, page, extensionId}) => {
     const storage_locator = page.locator('.storage-use-finite >> xpath=..');
 
     await page.evaluate(() => {
-        const newStyle = document.createElement('style');
-        newStyle.appendChild(document.createTextNode(`@font-face {
-    font-family: 'Noto Sans JP';
-    src: url('file:///home/runner/work/yomitan/yomitan/test/data/html/NotoSansJP.ttf');
-}
-body {
-font-family: "Noto Sans JP", Helvetica, Arial, sans-serif;
-font-size: 14px;
-padding: 0;
-margin: 0;
-background-color: #f8f8f8;
-}`));
+        var css = `
+@font-face {
+                font-family: 'Noto Sans JP';
+                src: url('file:///home/runner/work/yomitan/yomitan/test/data/html/NotoSansJP.ttf');
+            }
+.content { font-family: 'Noto Sans JP' }`;const head = document.head || document.getElementsByTagName('head')[0];
+    const style = document.createElement('style');
 
-        document.head.appendChild(newStyle);
+head.appendChild(style);
+
+style.type = 'text/css';
+if (style.styleSheet){
+  // This is required for IE8 and below.
+  style.styleSheet.cssText = css;
+} else {
+  style.appendChild(document.createTextNode(css));
+}
     });
 
     // make sure font is loaded just in case
@@ -85,20 +88,23 @@ background-color: #f8f8f8;
     await expect(page.locator('id=dictionaries')).toHaveText('Dictionaries (1 installed, 1 enabled)', {timeout: 5 * 60 * 1000});
 
     await page.evaluate(() => {
-        const newStyle = document.createElement('style');
-        newStyle.appendChild(document.createTextNode(`@font-face {
-    font-family: 'Noto Sans JP';
-    src: url('file:///home/runner/work/yomitan/yomitan/test/data/html/NotoSansJP.ttf');
-}
-body {
-font-family: "Noto Sans JP", Helvetica, Arial, sans-serif;
-font-size: 14px;
-padding: 0;
-margin: 0;
-background-color: #f8f8f8;
-}`));
+        var css = `
+@font-face {
+                font-family: 'Noto Sans JP';
+                src: url('file:///home/runner/work/yomitan/yomitan/test/data/html/NotoSansJP.ttf');
+            }
+.content { font-family: 'Noto Sans JP' }`;const head = document.head || document.getElementsByTagName('head')[0];
+    const style = document.createElement('style');
 
-        document.head.appendChild(newStyle);
+head.appendChild(style);
+
+style.type = 'text/css';
+if (style.styleSheet){
+  // This is required for IE8 and below.
+  style.styleSheet.cssText = css;
+} else {
+  style.appendChild(document.createTextNode(css));
+}
     });
 
     // await font loading
